@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RemoteJobs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #008080;
+      --secondary: #facc15;
+      --accent: #f472b6;
+      --muted: #6b7280;
+      --background: #f9fafb;
+      --card: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--background);
+      color: #000;
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--card);
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    .flex {
+      display: flex;
+      align-items: center;
+    }
+
+    .justify-between {
+      justify-content: space-between;
+    }
+
+    .gap-4 {
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #006666;
+    }
+
+    .stats-grid,
+    .jobs-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .card h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .search-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .input {
+      padding: 0.75rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    .select {
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background: #fff;
+      font-size: 1rem;
+    }
+
+    .job-card h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+    }
+
+    .job-card .company {
+      font-weight: 600;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+    }
+
+    .job-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 1rem 0;
+    }
+
+    .job-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .job-tags .badge.secondary {
+      background: var(--secondary);
+      color: #000;
+    }
+
+    .job-tags .badge.outline {
+      background: transparent;
+      border: 1px solid var(--muted);
+      color: var(--muted);
+    }
+
+    .footer-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .mt-8 {
+      margin-top: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .search-bar {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- <header>
+    <div class="container flex justify-between">
+      <h1 style="font-size: 2rem; font-weight: bold; color: var(--primary);">RemoteJobs</h1>
+      <div class="flex gap-4">
+        <button class="btn btn-outline">Sign In</button>
+        <button class="btn btn-primary">Sign Up</button>
+      </div>
+    </div>
+  </header> -->
+
+  <main class="container">
+    <!-- Stats -->
+    <section class="stats-grid mt-8">
+      <div class="card">
+        <p>Total Jobs</p>
+        <h2>2,847</h2>
+      </div>
+      <div class="card">
+        <p>New Today</p>
+        <h2>127</h2>
+      </div>
+      <div class="card">
+        <p>Saved Jobs</p>
+        <h2>8</h2>
+      </div>
+      <div class="card">
+        <p>Applications</p>
+        <h2>12</h2>
+      </div>
+    </section>
+
+    <!-- Search -->
+    <section class="card mt-8">
+      <div class="search-bar">
+        <input type="text" class="input" placeholder="Search for jobs, companies, or skills...">
+        <select class="select">
+          <option disabled selected>Location</option>
+          <option>Remote - US</option>
+          <option>Remote - EU</option>
+          <option>Remote - Global</option>
+        </select>
+        <select class="select">
+          <option disabled selected>Job Type</option>
+          <option>Full-time</option>
+          <option>Part-time</option>
+          <option>Contract</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Job Listings -->
+<section class="mt-8">
+  <h2 style="font-size: 1.5rem; font-weight: bold;">Latest Remote Jobs</h2>
+  <div class="jobs-grid mt-4">
+    <!-- Job 1 -->
+    <div class="card job-card">
+      <h3>Senior Frontend Developer</h3>
+      <div class="company">
+        TechCorp Inc. 
+        <span style="color: var(--accent); margin-left: 0.5rem;">❤️</span>
+      </div>
+      <div class="job-info">
+        <span>Remote - US</span>
+        <span>$120k - $150k</span>
+        <span>2 days ago</span>
+      </div>
+      <div class="job-tags">
+        <span class="badge secondary">React</span>
+        <span class="badge secondary">TypeScript</span>
+        <span class="badge secondary">Remote</span>
+        <span class="badge outline">Full-time</span>
+        <span class="badge" style="background-color: #c084fc;">Applied</span>
+      </div>
+      <div class="footer-buttons">
+        <button class="btn btn-primary">Apply Now</button>
+        <button class="btn btn-outline">View Details</button>
+      </div>
+    </div>
+
+    <!-- Job 2 -->
+    <div class="card job-card">
+      <h3>Product Designer</h3>
+      <div class="company">
+        Design Studio 
+        <span style="color: var(--accent); margin-left: 0.5rem;">❤️</span>
+      </div>
+      <div class="job-info">
+        <span>Remote - EU</span>
+        <span>$80k - $100k</span>
+        <span>1 day ago</span>
+      </div>
+      <div class="job-tags">
+        <span class="badge secondary">Figma</span>
+        <span class="badge secondary">UI/UX</span>
+        <span class="badge secondary">Remote</span>
+        <span class="badge outline">Full-time</span>
+        <span class="badge" style="background-color: #f472b6;">Interviewing</span>
+      </div>
+      <div class="footer-buttons">
+        <button class="btn btn-primary">Apply Now</button>
+        <button class="btn btn-outline">View Details</button>
+      </div>
+    </div>
+
+    <!-- Job 3 -->
+    <div class="card job-card">
+      <h3>Data Scientist</h3>
+      <div class="company">AI Solutions</div>
+      <div class="job-info">
+        <span>Remote - Global</span>
+        <span>$130k - $160k</span>
+        <span>5 hours ago</span>
+      </div>
+      <div class="job-tags">
+        <span class="badge secondary">Python</span>
+        <span class="badge secondary">ML</span>
+        <span class="badge secondary">Remote</span>
+        <span class="badge outline">Contract</span>
+        <span class="badge" style="background-color: #34d399;">Offered</span>
+      </div>
+      <div class="footer-buttons">
+        <button class="btn btn-primary">Apply Now</button>
+        <button class="btn btn-outline">View Details</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <div class="text-center mt-8">
+      <button class="btn btn-outline">Load More Jobs</button>
+    </div>
+  </main>
+</body>
+</html>
