@@ -56,27 +56,6 @@
   </div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.status-form select').forEach(function(select) {
-    select.addEventListener('change', async function(e) {
-      const form = e.target.closest('.status-form');
-      const appId = form.getAttribute('data-app-id');
-      const status = e.target.value;
-      try {
-        const res = await fetch(`/users/application/${appId}/status`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ status })
-        });
-        if (!res.ok) alert('Failed to update status');
-      } catch {
-        alert('Failed to update status');
-      }
-    });
-  });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
   // Status change
   document.querySelectorAll('.status-form select').forEach(function(select) {
     select.addEventListener('change', async function(e) {
@@ -89,7 +68,10 @@ document.addEventListener('DOMContentLoaded', function() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status })
         });
-        if (!res.ok) alert('Failed to update status');
+        // Only show alert if update actually fails
+        if (!res.ok) {
+          alert('Failed to update status');
+        }
       } catch {
         alert('Failed to update status');
       }
