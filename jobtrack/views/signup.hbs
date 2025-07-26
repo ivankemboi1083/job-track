@@ -1,41 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up</title>
-  <link rel="stylesheet" href="/css/signup.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobTrack | Sign Up</title>
+    <link rel="stylesheet" href="/css/signup.css">
 </head>
 <body>
-  <div class="auth-bg">
-    <div class="auth-card">
-      <div class="auth-logo">
-        <span class="logo-circle">J</span>
-      </div>
-      <h2 class="auth-title">Create Account</h2>
-      <form id="signupForm" method="POST" action="/users/signup">
-        <div class="input-group">
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" required autocomplete="username">
+    <div class="split-layout">
+        <!-- Left Teal Panel -->
+        <div class="teal-panel">
+            <div class="panel-content">
+                <h1>JobTrack</h1>
+                <p class="tagline">Track your job applications with ease</p>
+                <div class="illustration">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--amber)">
+                        <path d="M10 4h4v4h-4zM4 16h4v4H4zM16 16h4v4h-4zM10 10h4v4h-4z"/>
+                        <path d="M20 6h-4V2h-2v4h-4v2h4v4h2V8h4zM8 18H4v-4H2v4H0v2h2v4h2v-4h4zM24 18h-4v-4h-2v4h-4v2h4v4h2v-4h4z"/>
+                    </svg>
+                </div>
+            </div>
         </div>
-        <div class="input-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required autocomplete="email">
+
+        <!-- Right Form Panel -->
+        <div class="form-panel">
+            <div class="signup-form">
+                <form id="signupForm" action="/users/signup" method="POST">
+                    <h2>Create Account</h2>
+                    <p class="form-subtitle">Sign up to start tracking your job applications</p>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="username" name="username" required autocomplete="username" placeholder="Enter your username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <div class="input-wrapper">
+                            <input type="email" id="email" name="email" required autocomplete="email" placeholder="Enter your email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="password" name="password" required autocomplete="new-password" placeholder="Enter your password">
+                        </div>
+                    </div>
+                    <button type="submit">Sign Up</button>
+                    <div class="form-footer">
+                        Already have an account? <a href="/users/login">Login here</a>
+                    </div>
+                    {{#if error}}
+                        <div id="signupError" class="error-message">{{error}}</div>
+                    {{else}}
+                        <div id="signupError" class="error-message"></div>
+                    {{/if}}
+                </form>
+            </div>
         </div>
-        <div class="input-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" required autocomplete="new-password">
-        </div>
-        <button type="submit" class="auth-btn">Sign Up</button>
-      </form>
-      <p class="auth-switch">Already have an account? <a href="/users/login">Login</a></p>
-      {{#if error}}
-        <div id="signupError" class="error-message">{{error}}</div>
-      {{else}}
-        <div id="signupError" class="error-message"></div>
-      {{/if}}
     </div>
-  </div>
-  <script src="/javascripts/signup.js"></script>
+    <script src="/javascripts/signup.js"></script>
 </body>
 </html>

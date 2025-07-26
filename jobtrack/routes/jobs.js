@@ -33,7 +33,7 @@ router.post('/apply', async (req, res) => {
         appliedDate: new Date(),
       },
     });
-    res.json({ success: true });
+    return res.redirect('/users/dashboard');
   } catch (err) {
     res.status(500).json({ error: 'Could not save job' });
   }

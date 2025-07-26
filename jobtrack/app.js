@@ -13,9 +13,14 @@ var jobsRouter = require('./routes/jobs');
 var app = express();
 
 // Register Handlebars helpers
+
 const hbs = require('hbs');
 hbs.registerHelper('eq', function(a, b) {
   return a === b;
+});
+// Helper to render HTML safely for job descriptions
+hbs.registerHelper('safeHTML', function(description) {
+  return new hbs.handlebars.SafeString(description);
 });
 
 // view engine setup
