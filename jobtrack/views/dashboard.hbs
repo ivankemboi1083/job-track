@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Applications - Job Track</title>
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+  <div class="homepage-bg">
+    <header class="homepage-header">
+      <span class="logo-circle">J</span>
+      <h1 class="homepage-title">My Applications</h1>
+      <nav class="homepage-nav">
+        <a href="/">Home</a>
+        <a href="/users/logout">Logout</a>
+      </nav>
+    </header>
+    <main class="jobs-section">
+      <h2 class="jobs-title">Your Job Applications</h2>
+      {{#if applications.length}}
+      <div class="jobs-list">
+        {{#each applications}}
+          <div class="job-card">
+            <div class="job-header">
+              <span class="job-company">{{job.company}}</span>
+              <span class="job-category">{{job.source}}</span>
+            </div>
+            <div class="job-title">{{job.jobTitle}}</div>
+            <div class="job-meta">
+              <span class="job-location">{{job.location}}</span>
+              <span class="job-type">{{job.jobType}}</span>
+            </div>
+            <div class="job-meta">
+              <form class="status-form" data-app-id="{{id}}" style="display:inline;">
+                <label for="status-{{id}}">Status:</label>
+                <select name="status" id="status-{{id}}">
+                  <option value="applied" {{#if (eq status 'applied')}}selected{{/if}}>Applied</option>
+                  <option value="interviewing" {{#if (eq status 'interviewing')}}selected{{/if}}>Interviewing</option>
+                  <option value="offered" {{#if (eq status 'offered')}}selected{{/if}}>Offered</option>
+                  <option value="rejected" {{#if (eq status 'rejected')}}selected{{/if}}>Rejected</option>
+                  <option value="withdrawn" {{#if (eq status 'withdrawn')}}selected{{/if}}>Withdrawn</option>
+                </select>
+              </form>
+              <span>Applied: {{appliedDate}}</span>
+            </div>
+            <a class="job-link" href="{{job.url}}" target="_blank">View Job</a>
+            <button class="delete-app-btn" data-app-id="{{id}}" style="margin-top:10px;background:#d32f2f;color:#fff;border:none;padding:8px 14px;border-radius:5px;cursor:pointer;">Delete</button>
+          </div>
+        {{/each}}
+      </div>
+      {{else}}
+        <p style="text-align:center; color:#1976d2; font-size:1.1rem; margin-bottom:24px;">You have not applied to any jobs yet.</p>
+      {{/if}}
+    </main>
+  </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.status-form select').forEach(function(select) {
+    select.addEventListener('change', async function(e) {
+      const form = e.target.closest('.status-form');
+      const appId = form.getAttribute('data-app-id');
+      const status = e.target.value;
+      try {
+        const res = await fetch(`/users/application/${appId}/status`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status })
+        });
+        if (!res.ok) alert('Failed to update status');
+      } catch {
+        alert('Failed to update status');
+      }
+    });
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Status change
+  document.querySelectorAll('.status-form select').forEach(function(select) {
+    select.addEventListener('change', async function(e) {
+      const form = e.target.closest('.status-form');
+      const appId = form.getAttribute('data-app-id');
+      const status = e.target.value;
+      try {
+        const res = await fetch(`/users/application/${appId}/status`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status })
+        });
+        if (!res.ok) alert('Failed to update status');
+      } catch {
+        alert('Failed to update status');
+      }
+    });
+  });
+  // Delete application
+  document.querySelectorAll('.delete-app-btn').forEach(function(btn) {
+    btn.addEventListener('click', async function(e) {
+      e.preventDefault();
+      if (!confirm('Are you sure you want to delete this application?')) return;
+      const appId = btn.getAttribute('data-app-id');
+      try {
+        const res = await fetch(`/users/application/${appId}`, {
+          method: 'DELETE'
+        });
+        if (res.ok) {
+          btn.closest('.job-card').remove();
+        } else {
+          alert('Failed to delete application');
+        }
+      } catch {
+        alert('Failed to delete application');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

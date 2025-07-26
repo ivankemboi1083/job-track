@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Track</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="homepage-bg">
+    <header class="homepage-header">
+      <span class="logo-circle">J</span>
+      <h1 class="homepage-title">Job Track</h1>
+      <nav class="homepage-nav">
+        {{#if guest}}
+          <a href="/users/login">Login</a>
+          <a href="/users/signup">Sign Up</a>
+        {{else}}
+          <a href="/users/dashboard">Dashboard</a>
+          <a href="/users/logout">Logout</a>
+        {{/if}}
+      </nav>
+    </header>
+    <main class="jobs-section">
+      {{#if guest}}
+        <div class="landing-center">
+          <h2 class="jobs-title">Welcome to Job Track</h2>
+          <p class="landing-desc">Sign up or log in to view the latest remote jobs and track your applications!</p>
+          <div class="landing-actions">
+            <a href="/users/signup" class="landing-btn">Sign Up</a>
+            <a href="/users/login" class="landing-btn secondary">Login</a>
+          </div>
+        </div>
+      {{else}}
+        <h2 class="jobs-title">Remote Jobs</h2>
+        <form class="job-search-form" method="GET" action="/">
+          <input type="text" name="search" class="job-search-input" placeholder="Search jobs, companies, or keywords..." value="{{search}}" />
+          <button type="submit" class="job-search-btn">Search</button>
+        </form>
+        {{#if error}}
+          <div class="error-message">{{error}}</div>
+        {{/if}}
+        <div class="jobs-list">
+          {{#each jobs}}
+            <div class="job-card">
+              <div class="job-header">
+                <span class="job-company">
+                  {{#if company_logo_url}}
+                    <img src="{{company_logo_url}}" alt="{{company_name}} logo" class="job-logo" loading="lazy"/>
+                  {{/if}}
+                  {{company_name}}
+                </span>
+                <span class="job-category">{{category}}</span>
+              </div>
+              <div class="job-title">{{title}}</div>
+              <div class="job-meta">
+                <span class="job-location">{{candidate_required_location}}</span>
+                <span class="job-type">{{job_type}}</span>
+              </div>
+              <a class="job-link" href="{{url}}" target="_blank">View & Apply</a>
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+    </main>
+  </div>
+  <script src="/javascripts/jobs.js"></script>
+</body>
+</html>

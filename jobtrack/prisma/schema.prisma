@@ -1,0 +1,49 @@
+// Prisma schema for job tracking system using MariaDB
+// Adjust the provider and url as needed for your MariaDB setup
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  username     String    @unique
+  email        String    @unique
+  passwordHash String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  jobs         Job[]
+  applications Application[]
+}
+
+model Job {
+  id          Int       @id @default(autoincrement())
+  user        User      @relation(fields: [userId], references: [id])
+  userId      Int
+  jobTitle    String
+  company     String
+  location    String
+  source      String    // 'remotive', 'jsearch', 'manual', etc.
+  externalId  String?   // For jobs from APIs
+  url         String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  applications Application[]
+}
+
+model Application {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+  job        Job      @relation(fields: [jobId], references: [id])
+  jobId      Int
+  status     String   // 'applied', 'interviewing', 'offered', 'rejected', 'withdrawn'
+  appliedDate DateTime
+  notes      String?
+  updatedAt  DateTime @updatedAt
+}
