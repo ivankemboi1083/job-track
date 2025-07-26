@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-family: "Segoe UI", Tahoma, sans-serif;
   background-color: #ffffff;
   color: #000000;
   line-height: 1.6;
@@ -31,7 +31,7 @@ header {
 .logo {
   font-size: 2.8rem;
   font-weight: 800;
-  color: #FFC107; /* Amber */
+  color: #ffc107; /* Amber */
 }
 
 .tagline {
@@ -48,7 +48,8 @@ header {
   justify-content: space-between;
 }
 
-.search-box, .filter-dropdown {
+.search-box,
+.filter-dropdown {
   padding: 10px 15px;
   font-size: 1rem;
   border: 1px solid #ccc;
@@ -63,7 +64,7 @@ header {
   font-weight: 700;
   color: #008080; /* Teal */
   margin-bottom: 20px;
-  border-bottom: 2px solid #FFC107; /* Amber */
+  border-bottom: 2px solid #ffc107; /* Amber */
   display: inline-block;
   padding-bottom: 5px;
 }
@@ -95,7 +96,7 @@ header {
 
 .apply-btn {
   display: inline-block;
-  background-color: #FFC107; /* Amber */
+  background-color: #ffc107; /* Amber */
   color: #000000;
   padding: 10px 18px;
   border-radius: 5px;
