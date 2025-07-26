@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobTrack | Sign Up</title>
+    <style>
+        :root {
+            --teal: #008080;
+            --amber: #FFC107;
+            --black: #000;
+            --white: #fff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .split-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Left Teal Panel */
+        .teal-panel {
+            flex: 1;
+            background: var(--teal);
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .panel-content {
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .teal-panel h1 {
+            color: var(--amber);
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .illustration {
+            margin-top: 3rem;
+        }
+
+        .illustration svg {
+            width: 120px;
+            height: 120px;
+            fill: var(--amber);
+        }
+
+        /* Right Form Panel */
+        .form-panel {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--white);
+            padding: 2rem;
+        }
+
+        .signup-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .signup-form h2 {
+            color: var(--teal);
+            margin-bottom: 0.5rem;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+
+        .form-subtitle {
+            color: var(--black);
+            opacity: 0.7;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .name-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .name-group .form-group {
+            flex: 1;
+            margin-bottom: 1.2rem;
+        }
+
+        .signup-form label {
+            color: var(--black);
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: block;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 10px;
+            width: 20px;
+            height: 20px;
+            fill: var(--teal);
+            z-index: 1;
+        }
+
+        .signup-form input,
+        .signup-form select {
+            padding: 0.8rem 1rem 0.8rem 2.5rem; /* Adjusted for icon */
+            margin-bottom: 0;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            outline: none;
+            font-size: 1rem;
+            background: var(--white);
+            color: var(--black);
+            transition: border 0.2s ease-in-out;
+            width: 100%;
+        }
+
+        .signup-form input::placeholder {
+            color: #80c0c0; /* Lighter teal */
+            opacity: 0.7;
+        }
+
+        .signup-form input:focus,
+        .signup-form select:focus {
+            border: 1.5px solid var(--teal);
+        }
+
+        .signup-form select {
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="%23008080"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 1.2rem;
+            white-space: nowrap; /* Prevent wrapping */
+            font-size: 0.9rem; /* Smaller font for better fit */
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0; /* Remove margin for inline display */
+            line-height: 1.2; /* Tighten line height */
+        }
+
+        .signup-form button {
+            background: var(--teal);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 0;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .signup-form button:hover {
+            background: var(--amber);
+            color: var(--teal);
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--black);
+            opacity: 0.7;
+        }
+
+        .form-footer a {
+            color: var(--teal);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .form-text {
+            color: var(--black);
+            opacity: 0.7;
+            font-size: 0.85rem;
+            margin-top: 0.4rem;
+            display: block;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .split-layout {
+                flex-direction: column;
+                min-height: 100vh;
+            }
+
+            .teal-panel {
+                padding: 1.5rem 1rem;
+                flex: 0 0 auto;
+            }
+
+            .panel-content {
+                padding: 1rem;
+            }
+
+            .teal-panel h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .illustration svg {
+                width: 80px;
+                height: 80px;
+            }
+
+            .form-panel {
+                padding: 1rem;
+                flex: 1;
+                align-items: flex-start;
+            }
+
+            .signup-form {
+                padding: 1.5rem;
+                margin: 0.5rem 0;
+                max-height: none;
+            }
+
+            .signup-form h2 {
+                font-size: 1.5rem;
+            }
+
+            .form-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .signup-form input,
+            .signup-form select {
+                font-size: 0.95rem;
+                padding: 0.7rem 1rem 0.7rem 2.3rem;
+            }
+
+            .signup-form button {
+                padding: 0.7rem 0;
+                font-size: 1rem;
+            }
+
+            .checkbox-group {
+                font-size: 0.85rem; /* Smaller font for mobile */
+                gap: 4px;
+            }
+
+            .name-group {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .teal-panel {
+                padding: 1rem 0.5rem;
+            }
+
+            .teal-panel h1 {
+                font-size: 1.8rem;
+            }
+
+            .tagline {
+                font-size: 0.9rem;
+            }
+
+            .signup-form {
+                padding: 1rem;
+            }
+
+            .checkbox-group {
+                font-size: 0.8rem; /* Further reduce for small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="split-layout">
+        <!-- Left Teal Panel -->
+        <div class="teal-panel">
+            <div class="panel-content">
+                <h1>JobTrack</h1>
+                <p class="tagline">Track your job applications with ease</p>
+                <div class="illustration">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--amber)">
+                        <path d="M10 4h4v4h-4zM4 16h4v4H4zM16 16h4v4h-4zM10 10h4v4h-4z"/>
+                        <path d="M20 6h-4V2h-2v4h-4v2h4v4h2V8h4zM8 18H4v-4H2v4H0v2h2v4h2v-4h4zM24 18h-4v-4h-2v4h-4v2h4v4h2v-4h4z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Form Panel -->
+        <div class="form-panel">
+            <div class="signup-form">
+                <form action="/signup" method="POST">
+                    <h2>Create Account</h2>
+                    <p class="form-subtitle">Sign up to start tracking your job applications</p>
+                    
+                    <div class="name-group">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <div class="input-wrapper">
+                                <svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+                                </svg>
+                                <input type="text" id="first-name" name="first-name" required aria-required="true" placeholder="John">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <div class="input-wrapper">
+                                <svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+                                </svg>
+                                <input type="text" id="last-name" name="last-name" required aria-required="true" placeholder="Doe">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email-signup">Email Address</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path>
+                            </svg>
+                            <input type="email" id="email-signup" name="email" required aria-required="true" placeholder="example@domain.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password-signup">Password</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"></path>
+                            </svg>
+                            <input type="password" id="password-signup" name="password" required aria-required="true" minlength="8" pattern="(?=.*[A-Z])(?=.*\d).+" placeholder="Enter password">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"></path>
+                            </svg>
+                            <input type="password" id="confirm-password" name="confirm-password" required aria-required="true" minlength="8" placeholder="Confirm password">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number (Optional)</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.2 2.2z"></path>
+                            </svg>
+                            <input type="tel" id="phone" name="phone" aria-describedby="phone-optional" placeholder="+1234567890">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="linkedin">LinkedIn URL (Optional)</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"></path>
+                            </svg>
+                            <input type="url" id="linkedin" name="linkedin" aria-describedby="linkedin-optional" placeholder="https://linkedin.com/in/username">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="job-categories">Preferred Job Category</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M20 4h-3.17L15 2H9L7.17 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm-8 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"></path>
+                            </svg>
+                            <select id="job-categories" name="job-categories" aria-describedby="job-categories-desc">
+                                <option value="" disabled selected>Select a category</option>
+                                <option value="software">Software</option>
+                                <option value="design">Design</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="sales">Sales</option>
+                                <option value="finance">Finance</option>
+                            </select>
+                        </div>
+                        <small id="job-categories-desc" class="form-text">Select one job category</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="job-type">Job Type</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.22-1.79L9 14v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.91-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"></path>
+                            </svg>
+                            <select id="job-type" name="job-type" aria-describedby="job-type-desc">
+                                <option value="" disabled selected>Select job type</option>
+                                <option value="part-time">Part Time</option>
+                                <option value="full-time">Full Time</option>
+                                <option value="contract">Contract</option>
+                                <option value="internship">Internship</option>
+                            </select>
+                        </div>
+                        <small id="job-type-desc" class="form-text">Select one job type</small>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required aria-required="true">
+                        <label for="terms">I agree to the Terms of Service</label>
+                    </div>
+                    
+                    <button type="submit">Sign Up</button>
+                    
+                    <div class="form-footer">
+                        Already have an account? <a href="/login">Login here</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
